@@ -1,0 +1,13 @@
+DECLARE
+d1 DATE;
+d2 DATE;
+BEGIN
+d1 := '01-JAN-24' ;
+d2 := '31-DEC-24' ;
+WHILE(d1<=d2)
+LOOP
+DBMS_OUTPUT.PUT_LINE(d1||' '||TO_CHAR(d1,'day'));
+d1 := d1+1;
+END LOOP;
+END;
+/
