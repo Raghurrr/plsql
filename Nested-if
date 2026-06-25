@@ -1,0 +1,32 @@
+DECLARE
+vacno NUMBER(4);
+vtype CHAR(1);
+vamt NUMBER(5);
+vbal NUMBER(10,2);
+BEGIN
+vacno := &acno;
+vtype := '&type';
+vamt := &amount;
+IF vtype='W' THEN
+SELECT bal INTO vbal FROM accounts WHERE accno = vacno;
+
+IF vamt > vbal THEN
+DBMS_OUTPUT.PUT_LINE('insufficient balance');
+
+ELSE
+
+UPDATE accounts SET bal = bal-vamt WHERE accno = vacno;
+
+INSERT INTO transactions VALUES(S1.NEXTVAL,'W',SYSDATE,vamt,vacno);
+COMMIT;
+END IF;
+
+ELSIF vtype='D' THEN
+UPDATE accounts SET bal = bal+vamt WHERE accno = vacno;
+INSERT INTO transactions VALUES(S1.NEXTVAL,'D',SYSDATE,vamt,vacno);
+COMMIT;
+ELSE
+DBMS_OUTPUT.PUT_LINE('invalid transaction type');
+END IF;
+END;
+/
