@@ -1,0 +1,25 @@
+DECLARE
+   vempno NUMBER := &vempno;
+   vamt   NUMBER := &vamt;
+   vsal   NUMBER;
+BEGIN
+
+   UPDATE emp
+   SET sal = sal + vamt
+   WHERE empno = vempno;
+
+   SELECT sal
+   INTO vsal
+   FROM emp
+   WHERE empno = vempno;
+
+   IF vsal > 5000 THEN
+      DBMS_OUTPUT.PUT_LINE('Salary exceeds 5000. Rolling back...');
+      ROLLBACK;
+   ELSE
+      DBMS_OUTPUT.PUT_LINE('Salary updated successfully.');
+      COMMIT;
+   END IF;
+
+END;
+/
