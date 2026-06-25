@@ -1,0 +1,19 @@
+DECLARE
+a NUMBER(3);
+b NUMBER(3);
+c NUMBER(3);
+BEGIN
+a := &a;
+b := &b;
+c := a/b;
+DBMS_OUTPUT.PUT_LINE(c);
+EXCEPTION
+WHEN ZERO_DIVIDE THEN
+DBMS_OUTPUT.PUT_LINE('divisor cannot be zero');
+WHEN VALUE_ERROR THEN
+DBMS_OUTPUT.PUT_LINE('value exceeding size');
+WHEN OTHERS THEN
+DBMS_OUTPUT.PUT_LINE('unknown error');
+END;
+/
+=> wri
