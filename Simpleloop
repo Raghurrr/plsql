@@ -1,0 +1,17 @@
+DECLARE
+   x NUMBER;
+BEGIN
+   x := 1;
+
+   LOOP
+
+      DBMS_OUTPUT.PUT_LINE(x);
+
+      x := x + 1;
+
+      EXIT WHEN x > 20;
+
+   END LOOP;
+
+END;
+/
