@@ -1,0 +1,15 @@
+DECLARE
+veno emp.empno%TYPE;
+vename emp.ename%TYPE;
+vsal emp.sal%TYPE;
+BEGIN
+veno := &empno;
+SELECT ename,sal INTO vename,vsal FROM emp WHERE empno = veno ;
+DBMS_OUTPUT.PUT_LINE(vename||' '||vsal);
+EXCEPTION
+WHEN NO_DATA_FOUND THEN
+DBMS_OUTPUT.PUT_LINE('invalid empno');
+WHEN VALUE_ERROR THEN
+DBMS_OUTPUT.PUT_LINE(' value exceeding size');
+END;
+/
