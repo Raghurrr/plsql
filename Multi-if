@@ -1,0 +1,35 @@
+DECLARE
+   vempno NUMBER;
+   vsal   NUMBER;
+   vjob   VARCHAR2(20);
+   vpct   NUMBER;
+BEGIN
+
+   vempno := &vempno;
+
+   SELECT job
+   INTO vjob
+   FROM emp
+   WHERE empno = vempno;
+
+   IF UPPER(vjob) = 'CLERK' THEN
+      vpct := 10;
+
+   ELSIF UPPER(vjob) = 'MANAGER' THEN
+      vpct := 20;
+
+   ELSIF UPPER(vjob) = 'SALESMAN' THEN
+      vpct := 15;
+
+   ELSE
+      vpct := 5;
+   END IF;
+
+   UPDATE emp
+   SET sal = sal + (sal * vpct / 100)
+   WHERE empno = vempno;
+
+   COMMIT;
+
+END;
+/
