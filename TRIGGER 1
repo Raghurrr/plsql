@@ -1,0 +1,44 @@
+=> a trigger is also a named PL/SQL block like procedure but executed implicitly
+by oracle whenever user submits DML/DDL commands.
+=> triggers are created
+1 to control dmls/ddls
+2 to enforce complex rules and validations
+3 to audit day-to-day operations on tables
+
+==============================================================================================================================================================
+CREATE OR REPLACE TRIGGER T1
+BEFORE INSERT OR UPDATE OR DELETE
+ON EMP
+BEGIN
+IF TO_CHAR(SYSDATE,'DY') ='SUN' THEN
+RAISE_APPLICATION_ERROR(-20001,'sunday not allowed');
+END IF;
+END;
+/
+Testing :-
+SQL>UPDATE EMP SET SAL = SAL + 1000 WHERE EMPNO = 7566 ; => ERROR
+
+================================================================================================================================================================
+
+
+CREATE OR REPLACE TRIGGER T2
+BEFORE INSERT OR UPDATE OR DELETE
+ON EMP
+BEGIN
+IF TO_CHAR(SYSDATE,'D') BETWEEN 2 AND 6 THEN
+IF TO_CHAR(SYSDATE,'HH24') < 10 OR TO_CHAR(SYSDATE,'HH24') >= 16 THEN
+RAISE_APPLICATION_ERROR(-20001,'only between 10am and 4pm');
+END IF;
+ELSIF TO_CHAR(SYSDATE,'DY')='SAT' THEN
+IF TO_CHAR(SYSDATE,'HH24') < 10 OR TO_CHAR(SYSDATE,'HH24') >= 14 THEN
+RAISE_APPLICATION_ERROR(-20001,'only between 10am and 2pm');
+END IF;
+ELSE
+RAISE_APPLICATION_ERROR(-20001,'sunday not allowed');
+END IF;
+END;
+/
+Testing :-
+
+SQL>DELETE FROM emp WHERE empno = 7844; => error
+
