@@ -1,0 +1,22 @@
+CREATE OR REPLACE PROCEDURE raise_salary
+(
+   pempno   IN emp.empno%TYPE,
+   pamt     IN NUMBER,
+   pnewsal  OUT emp.sal%TYPE
+)
+IS
+BEGIN
+   UPDATE emp
+   SET sal = sal + pamt
+   WHERE empno = pempno;
+
+   SELECT sal
+   INTO pnewsal
+   FROM emp
+   WHERE empno = pempno;
+
+   COMMIT;
+
+   DBMS_OUTPUT.PUT_LINE('New Salary = ' || pnewsal);
+END;
+/
