@@ -1,3 +1,9 @@
+=> a procedure is a named PL/SQL Block that accepts some input performs some action on db
+and may or may not returns a value.
+=> procedures are created to perform one or more dml operations on tables.
+
+====================================================================================================================================================
+
 CREATE OR REPLACE PROCEDURE raise_salary
 (
    pempno   IN emp.empno%TYPE,
