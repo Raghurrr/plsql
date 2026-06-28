@@ -2,6 +2,15 @@
 and may or may not returns a value.
 => procedures are created to perform one or more dml operations on tables.
 
+
+Execution :-
+============
+
+SQL>VARIABLE K NUMBER ;
+SQL>EXECUTE raise_salary(7369,1000,:K);
+SQL> PRINT :K
+NOTE :- variables declared at sql prompt are called bind variables and variables
+are prefixed with : operator.
 ====================================================================================================================================================
 
 CREATE OR REPLACE PROCEDURE raise_salary
