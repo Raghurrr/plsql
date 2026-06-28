@@ -1,0 +1,42 @@
+=> a function is also a named PL/SQL block that accepts some input performs
+some calculation and must return a value.
+=> functions are created
+1 for calculations
+2 to fetch value from db
+
+
+Execution :-
+1 SQL commands
+2 another pl/sql prog
+3 front-end
+from sql commands :-
+--------------------
+SQL>SELECT CALC(10,20,'*') FROM DUAL ; => 200
+
+==============================================================================================================================================
+
+
+CREATE OR REPLACE FUNCTION calc
+(
+   a NUMBER,
+   b NUMBER,
+   op CHAR
+)
+RETURN NUMBER
+IS
+BEGIN
+   IF op = '+' THEN
+      RETURN (a + b);
+
+   ELSIF op = '-' THEN
+      RETURN (a - b);
+
+   ELSIF op = '*' THEN
+      RETURN (a * b);
+
+   ELSE
+      RETURN (a / b);
+
+   END IF;
+END;
+/
